@@ -4,7 +4,7 @@
   "scripts": {
     "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
     "prepare": "npm run dist",
-    "test": "node --import tsx --test \"tests/**/*.test.ts\"",
+    "test": "node --import tsx --test tests/*.test.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tests/tsconfig.json",
     "update": "npm install -g generator-joplin && yo joplin --update"
   },
@@ -42,6 +42,6 @@
     "publish"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.18.0"
   }
 }

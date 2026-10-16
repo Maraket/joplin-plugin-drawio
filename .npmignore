@@ -3,6 +3,7 @@
 /*.jpl
 /api
 /src
+/tests
 /dist
 tsconfig.json
 webpack.config.js
