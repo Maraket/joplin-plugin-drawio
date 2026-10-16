@@ -20,3 +20,4 @@ The user-facing guide is the root [`README.md`](../README.md).
 ## Index
 
 - [Architecture](./architecture.md) - components, directory hierarchy, module boundaries
+- [Data flow](./data-flow.md) - create, render, edit flows and trust boundaries
