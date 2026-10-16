@@ -1,6 +1,6 @@
 # 0001. Adopt node:test with tsx as the unit test runner
 
-- Status: Accepted (implementation pending, tracked in `plans/01-remediation-roadmap.md` item 3.1)
+- Status: Accepted and implemented (branch `adr/test-runner`)
 - Date: 2026-10-16
 - Supersedes: none
 - Superseded by: none
@@ -136,3 +136,21 @@ modules and tests, keep `isolatedModules`-safe syntax, pin tsx and Node.
 - **Tension, `CLAUDE.md` gate.** Its `npx tsc --noEmit` step becomes the
   two-config `typecheck` script. `CLAUDE.md` is unversioned by decision, so this
   is recorded in `.standards/` and must be applied to local copies by hand.
+
+## Implementation Notes
+
+Recorded after implementation; none of these change the decision.
+
+- **Local typings.** `@types/node` 14 has no `node:test`, and `@types/node` 16 and 18
+  fail to parse under TypeScript 3.9 (TS1005/TS1110 in `crypto.d.ts`, `events.d.ts`).
+  `tests/node-test.d.ts` declares the used surface. Remove it after the toolchain upgrade.
+- **`skipLibCheck`** was added to the root `tsconfig.json`. The unmodified
+  `npx tsc --noEmit` already failed with 14 errors, all in generated `api/*.d.ts`, so
+  the documented gate was red before this change.
+- **`npm ci`** was failing on `master`; the lockfile was refreshed in a separate commit.
+- **Todo tests** (`{ todo }`) record unfixed findings S1 and S5. They keep the run green
+  and are removed when the fixes land, satisfying rule 8.
+- **Rule 4 partly met.** `Settings` (class) stays in `src/settings.ts` because it imports
+  runtime enums from `api/types`; only `settingsDefaults.ts` was extracted.
+- **Rule 9 verified.** `.jpl` file list identical before and after; only `index.js` and
+  `contentScript.js` hashes changed, from the module splits.

@@ -53,6 +53,16 @@ The plugin identify an image as a diagram if the alternative text is drawio and 
 
 
 # Development
+
+```bash
+npm install
+npm test            # unit tests (node:test via tsx)
+npm run typecheck   # tsc over src and tests
+NODE_OPTIONS=--openssl-legacy-provider npm run dist   # build the .jpl (needed on Node >= 17)
+```
+
+See [docs/testing.md](./docs/testing.md) for test conventions and [docs/](./docs/README.md) for architecture notes.
+
 If you want to contribute to this plugin you can find here some useful references:
 
 - [Joplin - Getting started with plugin development](https://joplinapp.org/api/get_started/plugins/)

@@ -18,3 +18,7 @@ non-trivial implementation.
 | Each fix to a security-relevant regex or escaping lands with a regression test. | ADR-0001 |
 | Manual Joplin verification remains required for dialog, viewer and settings changes. | ADR-0001 |
 | If the runner blocks the toolchain upgrade, remove it instead of blocking the upgrade. | ADR-0001 |
+| Root `tsconfig.json` uses `skipLibCheck` because generated `api/*.d.ts` do not resolve standalone. Do not hand-edit `api/`. | ADR-0001 (Implementation Notes) |
+| `tests/node-test.d.ts` supplies `node:test` typings until `@types/node` >= 18 is usable; remove it with the TypeScript upgrade. | ADR-0001 (Implementation Notes) |
+| Known-bug tests use `{ todo: '<finding id>' }` and lose the marker in the fix commit. | ADR-0001 |
+| Verify with `npm run typecheck` and `npm test` (replacing bare `npx tsc --noEmit`), plus `npm run dist` (needs `--openssl-legacy-provider` on Node >= 17). | ADR-0001 |
