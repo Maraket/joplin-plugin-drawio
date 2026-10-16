@@ -25,3 +25,4 @@ The user-facing guide is the root [`README.md`](../README.md).
 - [Dependencies](./dependencies.md) - inventory, audit, upgrade findings
 - [Testing](./testing.md) - current state, gaps, manual checklist
 - [Standards audit](./standards-audit.md) - declared process vs. repository, conventions, code health
+- [ADR index](./adr/) - architecture decision records
