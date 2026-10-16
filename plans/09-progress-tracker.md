@@ -6,20 +6,22 @@ Updated: 2026-10-16
 
 - Critical analysis docs shipped (`docs/`), remediation roadmap written.
 - ADR-0001 accepted and implemented on `adr/test-runner`: `node:test` + `tsx`, `npm test`,
-  `npm run typecheck`, 4 pure modules extracted, 25 tests (21 pass, 4 todo for S1/S5).
+  `npm run typecheck`, 4 pure modules extracted, test suite established.
+- Phase 1 fix 1.1 (security S1) implemented on `adr/test-runner`: HTML attribute escaping
+  in `buildDialogHtml`, S1 todo tests converted to passing regression tests (30 passing tests, 2 remaining todo for S4/S5).
 - Lockfile refreshed so `npm ci` works.
 - Branches `docs/restructure-and-analysis` and `adr/test-runner` are pushed. `master` is
   untouched and equals `origin/master`.
 
 ## In Progress
 
-Review of the `adr/test-runner` diff; branch sorting with the user.
+Phase 1 remediations on `adr/test-runner` (1.1 complete; next: 1.5, S5, 1.3).
 
 ## Next Steps
 
 1. Sort out branches / PRs (docs branch first, then `adr/test-runner`).
-2. Phase 1 fixes, each with its regression test and removal of the matching `todo`:
-   S1 escaping (1.1), S5 base64 validation, server validation (1.3), `themeUi` default (1.5).
+2. Continue Phase 1 fixes, each with its regression test and removal of matching `todo`:
+   `themeUi` default (1.5), S5 base64 validation, server validation (1.3), `postMessage` origin check (1.2).
 3. CI workflow: `npm ci`, `typecheck`, `test`, `dist` (Phase 4).
 4. Record ADRs for existing decisions and extend `.standards/` (3.6).
 

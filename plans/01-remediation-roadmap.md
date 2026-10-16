@@ -7,7 +7,7 @@ Items marked **ADR** are architectural and need council review and an ADR first.
 
 | # | Item | Source | Size |
 | --- | --- | --- | --- |
-| 1.1 | Escape attribute values in `buildDialogHTML` | security S1 | S |
+| 1.1 | ~~Escape attribute values in `buildDialogHTML`~~ (done on `adr/test-runner`) | security S1 | S |
 | 1.2 | Restrict `postMessage` target and check `evt.origin` in `DiagramEditor.js` | security S2 | S |
 | 1.3 | Validate `server` setting (https URL) via `_checks` | security S3 | S |
 | 1.4 | Remove payload logging, gate the rest behind a debug flag | security S6 | S |
