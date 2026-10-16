@@ -24,3 +24,4 @@ The user-facing guide is the root [`README.md`](../README.md).
 - [Security analysis](./security-analysis.md) - trust boundaries, findings S1-S8
 - [Dependencies](./dependencies.md) - inventory, audit, upgrade findings
 - [Testing](./testing.md) - current state, gaps, manual checklist
+- [Standards audit](./standards-audit.md) - declared process vs. repository, conventions, code health
