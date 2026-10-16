@@ -16,3 +16,7 @@ The user-facing guide is the root [`README.md`](../README.md).
 - Images go in `docs/images/`, referenced with relative links.
 - Developer and architecture docs sit at the top level or in a topic folder.
 - ADRs go in `docs/adr/NNNN-<concise-title>.md`.
+
+## Index
+
+- [Architecture](./architecture.md) - components, directory hierarchy, module boundaries
