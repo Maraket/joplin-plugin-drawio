@@ -30,7 +30,7 @@ Items marked **ADR** are architectural and need council review and an ADR first.
 
 | # | Item | Notes |
 | --- | --- | --- |
-| 3.1 | **ADR** Introduce unit test runner (Jest or Vitest), pure-function scope first | Unblocks every later item. Do before 1.x if possible. |
+| 3.1 | ~~ADR~~ Unit test runner: decided, see [ADR-0001](../docs/adr/0001-unit-test-runner.md) (node:test + tsx). Implementation pending. | Unblocks every later item. |
 | 3.2 | **ADR** Replace inline `<style onload>` with content-script asset and event delegation | security S4 |
 | 3.3 | **ADR** Toolchain upgrade: webpack 5, TypeScript 5, current `@types` | Clears most audit findings. Track against Joplin generator template. |
 | 3.4 | **ADR** Retire or bundle remote editor (offline, version pinning) | Large. Evaluate licence and size first. |
