@@ -1,6 +1,7 @@
 import joplin from 'api'
 import { createDiagramResource, getDiagramResource, updateDiagramResource } from './resources'
 import { Settings } from './settings'
+import { buildDialogHtml, resolveThemeUi } from './dialogHtml'
 import { v4 as uuidv4 } from 'uuid'
 
 const Config = {
@@ -25,27 +26,11 @@ export class EditorDialog {
     }
 
     private getThemeUi(sketch: boolean): string {
-        let themeUi = ''
-        if (sketch) {
-            themeUi = 'sketch'
-        } else {
-            themeUi = this._settings.get('themeUi')
-            if (this._settings.get('themeDark') === true && themeUi === 'kennedy') {
-                themeUi = 'dark'
-            }
-        }
-        return themeUi
+        return resolveThemeUi(sketch, this._settings.get('themeUi'), this._settings.get('themeDark'))
     }
 
     private buildDialogHTML(diagramBody: string, themeUi: string): string {
-        return `
-            <form name="main">
-                <a href="#" onclick="startDrawio()">Click here to load draw.io if it does not start automatically...</a>
-                <input type="hidden" id="settings" value='${JSON.stringify(this._settings.toObject())}' />
-                <input type="hidden" id="setting-theme-ui" value='${themeUi}' />
-                <input type="hidden" id="diagram" name="diagram" value="${diagramBody}">
-            </form>
-            `
+        return buildDialogHtml(diagramBody, themeUi, this._settings.toObject())
     }
 
     async init(): Promise<void> {
