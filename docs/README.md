@@ -22,3 +22,4 @@ The user-facing guide is the root [`README.md`](../README.md).
 - [Architecture](./architecture.md) - components, directory hierarchy, module boundaries
 - [Data flow](./data-flow.md) - create, render, edit flows and trust boundaries
 - [Security analysis](./security-analysis.md) - trust boundaries, findings S1-S8
+- [Dependencies](./dependencies.md) - inventory, audit, upgrade findings
