@@ -28,7 +28,7 @@ Constraints established during review:
 ## Decision Outcome
 
 **Accepted.** Use Node's built-in `node:test` and `node:assert`, executed through
-`tsx` (`node --import tsx --test tests/`).
+`tsx` (`node --import tsx --test tests/*.test.ts`).
 
 Rules:
 
@@ -52,8 +52,9 @@ Rules:
 7. **Dependencies:** `tsx` as an exact-pinned devDependency; `engines.node`
    declared; `package-lock.json` committed. Fixtures are synthetic.
 8. **Order of work:** write regression tests for the id regexes and escaping
-   before refactoring. S1, S3 and S4 tests begin as expected-failure cases until
-   their fixes land. Each Phase 1 fix lands with a regression test.
+   before refactoring. S1, S4 and S5 tests begin as expected-failure cases until
+   their fixes land. S3 is deferred: no server-URL validator exists to test, so its
+   test is written together with the fix (roadmap 1.3). Each Phase 1 fix lands with a regression test.
 9. **Verification:** after implementation, compare `dist/index.js` hash and
    `tar tf publish/*.jpl` before and after; both must be unchanged by test files.
 10. **Exit path:** if the runner blocks the toolchain upgrade (roadmap 3.3), delete
@@ -154,3 +155,14 @@ Recorded after implementation; none of these change the decision.
   runtime enums from `api/types`; only `settingsDefaults.ts` was extracted.
 - **Rule 9 verified.** `.jpl` file list identical before and after; only `index.js` and
   `contentScript.js` hashes changed, from the module splits.
+- **Rule 8 amended for S3.** There is no pure validator for the `server` setting yet
+  (`_checks` in `settings.ts` is empty), so no expected-failure test can be written.
+  The test is added with fix 1.3. S1 (3 cases), S4 (1 case) and S5 (1 case) are todo tests.
+  S4 is testable without extraction because `contentScript.ts` has no Joplin dependency.
+- **Test command.** The glob is unquoted (`tests/*.test.ts`) so the shell expands it;
+  Node's own `--test` glob support needs Node >= 21. `--import` needs Node >= 18.18,
+  hence `engines.node >= 18.18.0`. Tests are therefore kept flat in `tests/`.
+- **Review follow-ups.** `skipLibCheck` also skips checking `tests/node-test.d.ts`;
+  accepted because the root config needs it for `api/`. A todo test that starts passing
+  is not flagged by `node:test`: when fixing a finding, `grep -rn "todo:" tests`.
+  `esbuild` (a `tsx` dependency) runs an install script, as on every `npm install`.

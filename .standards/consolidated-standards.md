@@ -7,7 +7,7 @@ non-trivial implementation.
 
 | Rule | Source |
 | --- | --- |
-| Unit tests use `node:test` and `node:assert`, run with `node --import tsx --test tests/`. | [ADR-0001](../docs/adr/0001-unit-test-runner.md) |
+| Unit tests use `node:test` and `node:assert`, run with `node --import tsx --test tests/*.test.ts` (Node >= 18.18; tests stay flat in `tests/`). | [ADR-0001](../docs/adr/0001-unit-test-runner.md) |
 | Tests live in `tests/` at the repo root, mirroring `src/`. Nothing test-related under `src/`. | ADR-0001 |
 | Tests import only joplin-free modules, by relative path. No `api` alias, no bare `baseUrl` imports, no Joplin mock. | ADR-0001 |
 | Pure logic lives in modules with no `joplin`, `fs` or `os` use at load. The content script bundle imports only `contentScript/*`. | ADR-0001 |

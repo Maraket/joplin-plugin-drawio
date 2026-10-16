@@ -39,7 +39,7 @@ Items marked **ADR** are architectural and need council review and an ADR first.
 
 ## Phase 4 - Process
 
-- Add a CI workflow: `npm ci`, `npx tsc --noEmit`, `npm run dist`, tests.
+- Add a CI workflow: `npm ci`, `npm run typecheck`, `npm test`, `npm run dist`.
 - Enable `strict` in `tsconfig.json` incrementally.
 - Commit the process rules from `CLAUDE.md` or mirror them in `docs/`.
 - Single source for `version` (manifest and `package.json`).

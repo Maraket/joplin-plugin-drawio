@@ -26,11 +26,15 @@ why the plugin needs an internet connection.
 ├── src/
 │   ├── index.ts         Entry: register settings, commands, Tools menu, content script, message handler
 │   ├── editorDialog.ts  EditorDialog: dialog lifecycle, new/edit flows, note body rewrite
-│   ├── resources.ts     Resource create/read/update, title-encoded options, temp files
+│   ├── dialogHtml.ts    Pure: dialog HTML template and theme resolution
+│   ├── resources.ts     Resource create/read/update, temp files
+│   ├── resourceTitle.ts Pure: title codec (`drawio-{json}`) and data-URI regex
 │   ├── settings.ts      Setting definitions, registration, change handling
+│   ├── settingsDefaults.ts  Pure: default values, theme and language lists
 │   ├── manifest.json    Plugin manifest (version duplicated in package.json)
-│   ├── contentScript/   markdown-it plugin + CSS (separate webpack entry)
+│   ├── contentScript/   markdown-it plugin + CSS (separate webpack entry); diagramId.ts is the pure id parser
 │   └── dialog/          Vendored draw.io embed helper + bootstrap (plain JS, copied as-is)
+├── tests/               node:test unit tests for the pure modules (not shipped; see testing.md)
 ├── webpack.config.js    Generator-provided build; do not restructure
 ├── plugin.config.json   Lists extra webpack entries (content script)
 ├── tsconfig.json
@@ -43,8 +47,8 @@ why the plugin needs an internet connection.
 - `editorDialog.ts` depends on `resources` and `settings`. It mixes three concerns:
   dialog lifecycle, HTML generation, and note-body mutation.
 - `resources.ts` is the only module that touches resource files. It also encodes
-  diagram options (`sketch`) into the resource **title** as `drawio-{json}`.
-- `settings.ts` holds both the setting schema and the language list.
+  diagram options (`sketch`) into the resource **title** as `drawio-{json}` (codec in `resourceTitle.ts`).
+- `settings.ts` holds the setting schema; defaults and the language list live in `settingsDefaults.ts`.
 - The content script has no imports from the plugin; the contract is the
   message shape `{ diagramId, action: 'edit' | 'check' }` and the
   `drawio-` title prefix.

@@ -6,11 +6,13 @@ Runner: Node's built-in `node:test`, executed through `tsx`
 ([ADR-0001](./adr/0001-unit-test-runner.md)).
 
 ```bash
-npm test             # node --import tsx --test "tests/**/*.test.ts"
+npm test             # node --import tsx --test tests/*.test.ts
 npm run typecheck    # tsc over src, then over src + tests
 ```
 
-- Needs Node >= 18 (`engines`). Runs in under a second.
+- Needs Node >= 18.18 (`engines`): `--import` needs 18.18, and the glob is left to the
+  shell because Node's own `--test` glob support needs Node 21. Keep tests flat in `tests/`.
+  Runs in under a second.
 - `tsx` strips types without checking them, so `typecheck` is a required gate.
   The root `tsconfig.json` includes only `src` and `tests/tsconfig.json` adds the tests.
 - `skipLibCheck` is on because the generated `api/*.d.ts` files reference
@@ -28,6 +30,7 @@ npm run typecheck    # tsc over src, then over src + tests
 | --- | --- | --- |
 | `tests/contentScript.diagramId.test.ts` | Resource id extraction for Markdown and rich text, id charset | `src/contentScript/diagramId.ts` |
 | `tests/resourceTitle.test.ts` | Title codec, data-URI regex | `src/resourceTitle.ts` |
+| `tests/contentScript.render.test.ts` | Rendered viewer HTML for `drawio` images (stubbed markdown-it) | `src/contentScript/contentScript.ts` (no Joplin imports) |
 | `tests/dialogHtml.test.ts` | Theme resolution, dialog HTML structure | `src/dialogHtml.ts` |
 | `tests/settingsDefaults.test.ts` | Default language, theme, server | `src/settingsDefaults.ts` |
 
@@ -38,7 +41,9 @@ npm run typecheck    # tsc over src, then over src + tests
 - Use `import * as assert from 'node:assert/strict'`, `import type` for types, no `const enum`.
 - Known-bug cases use `{ todo: '<finding>' }`. A todo test runs, is reported as failing
   in the output, and does not fail the run. When the fix lands, delete the `todo` option.
-  Open todos: S1 (3 cases) and S5 (1 case).
+  `node:test` does not flag a todo that starts passing, so find them with
+  `grep -rn "todo:" tests`. Open todos: S1 (3 cases), S4 (1), S5 (1). S3 gets its test with fix 1.3.
+- `npm install` runs the `esbuild` install script (a `tsx` dependency).
 - Fixtures are synthetic.
 
 ### Verifying that tests do not ship
@@ -64,7 +69,7 @@ tar tf publish/*.jpl | sort     # must list no tests/ or tsx files
    the note-body id replacement in `edit`, and the vendored `src/dialog/*.js`.
 2. No contract test between the content script message shape and the plugin handler.
 3. No CI, so nothing enforces `npm test`, `typecheck` or the build.
-4. Four known-bug tests are todo (S1, S5) and do not yet protect anything.
+4. Five known-bug tests are todo (S1, S4, S5) and do not yet protect anything; S3 has none.
 
 ## Manual verification checklist (interim)
 
