@@ -72,7 +72,7 @@ infeasible without a TypeScript upgrade. Vitest raises the Node floor and adds a
 second bundler beside webpack 4. Pure-function scope does not need Jest's mocking.
 
 Consequences: no snapshots and only basic mocks; types are unchecked at test time
-(mitigated by rule 3); contributors need Node >=18; and without CI the tests are
+(mitigated by rule 3); contributors need Node >=18.18; and without CI the tests are
 a local habit (CI is roadmap Phase 4).
 
 ## Agent Perspectives
@@ -149,13 +149,13 @@ Recorded after implementation; none of these change the decision.
   `npx tsc --noEmit` already failed with 14 errors, all in generated `api/*.d.ts`, so
   the documented gate was red before this change.
 - **`npm ci`** was failing on `master`; the lockfile was refreshed in a separate commit.
-- **Todo tests** (`{ todo }`) record unfixed findings S1 and S5. They keep the run green
+- **Todo tests** (`{ todo }`) record unfixed findings S1, S4 and S5. They keep the run green
   and are removed when the fixes land, satisfying rule 8.
 - **Rule 4 partly met.** `Settings` (class) stays in `src/settings.ts` because it imports
   runtime enums from `api/types`; only `settingsDefaults.ts` was extracted.
 - **Rule 9 verified.** `.jpl` file list identical before and after; only `index.js` and
   `contentScript.js` hashes changed, from the module splits.
-- **Rule 8 amended for S3.** There is no pure validator for the `server` setting yet
+- **Rule 8 amended for S3 (implementer amendment, 2026-10-16; not re-deliberated by the council, ratification pending).** There is no pure validator for the `server` setting yet
   (`_checks` in `settings.ts` is empty), so no expected-failure test can be written.
   The test is added with fix 1.3. S1 (3 cases), S4 (1 case) and S5 (1 case) are todo tests.
   S4 is testable without extraction because `contentScript.ts` has no Joplin dependency.

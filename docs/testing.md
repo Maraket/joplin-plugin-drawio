@@ -12,7 +12,8 @@ npm run typecheck    # tsc over src, then over src + tests
 
 - Needs Node >= 18.18 (`engines`): `--import` needs 18.18, and the glob is left to the
   shell because Node's own `--test` glob support needs Node 21. Keep tests flat in `tests/`.
-  Runs in under a second.
+  Runs in under a second. On Windows `cmd.exe` the glob is not expanded, so use Git Bash or
+  Node >= 21 there.
 - `tsx` strips types without checking them, so `typecheck` is a required gate.
   The root `tsconfig.json` includes only `src` and `tests/tsconfig.json` adds the tests.
 - `skipLibCheck` is on because the generated `api/*.d.ts` files reference
