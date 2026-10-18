@@ -27,8 +27,8 @@ test('dialog HTML carries settings, theme and diagram in hidden inputs', () => {
     assert.match(html, /onclick="startDrawio\(\)"/)
 })
 
-// S1 (docs/security-analysis.md): values are interpolated into HTML attributes
-// without escaping. Fixed in Phase 1 (1.1).
+// S1 (docs/security-analysis.md): values interpolated into HTML attributes must be
+// escaped. Fixed in Phase 1 (1.1).
 test('a quote in the server setting cannot break out of the settings attribute', () => {
     const html = buildDialogHtml('x', 'kennedy', { server: "x' onfocus='alert(1)" })
     assert.doesNotMatch(html, /onfocus='alert\(1\)/)
@@ -58,4 +58,35 @@ test('escapeAttribute handles empty or falsy values safely', () => {
     assert.equal(escapeAttribute(''), '')
     assert.equal(escapeAttribute(null as any), '')
     assert.equal(escapeAttribute(undefined as any), '')
+})
+
+// Mirrors what the HTML parser does to an attribute value before `.value` is read
+// in bootstrap.js. `&amp;` is decoded last so `&amp;quot;` stays literal.
+function decodeAttribute(value: string): string {
+    return value
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+}
+
+test('escaping round-trips: decoding the attribute restores the original value', () => {
+    for (const value of [
+        'plain',
+        `it's "quoted" & <tagged>`,
+        '&amp; &quot; &#39; already-escaped looking text',
+        'data:image/png;base64,QUJD+/=',
+        '\n\ttabs and newlines',
+    ]) {
+        assert.equal(decodeAttribute(escapeAttribute(value, '"')), value, value)
+        assert.equal(decodeAttribute(escapeAttribute(value, "'")), value, value)
+    }
+})
+
+test('the settings JSON survives escaping and parses back to the same object', () => {
+    const settings = { server: `https://example.com/?a=1&b='2'`, themeDark: true, note: '<b>"x"</b>' }
+    const html = buildDialogHtml('x', 'kennedy', settings)
+    const attr = /id="settings" value='([^']*)'/.exec(html)[1]
+    assert.deepEqual(JSON.parse(decodeAttribute(attr)), settings)
 })

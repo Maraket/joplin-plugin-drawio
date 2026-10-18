@@ -43,7 +43,7 @@ npm run typecheck    # tsc over src, then over src + tests
 - Known-bug cases use `{ todo: '<finding>' }`. A todo test runs, is reported as failing
   in the output, and does not fail the run. When the fix lands, delete the `todo` option.
   `node:test` does not flag a todo that starts passing, so find them with
-  `grep -rn "todo:" tests`. Open todos: S1 (3 cases), S4 (1), S5 (1). S3 gets its test with fix 1.3.
+  `grep -rn "todo:" tests`. Open todos: S4 (1 case) and S5 (1 case). S1 is fixed (`escapeAttribute`), S3 gets its test with fix 1.3.
 - `npm install` runs the `esbuild` install script (a `tsx` dependency).
 - Fixtures are synthetic.
 
@@ -70,7 +70,9 @@ tar tf publish/*.jpl | sort     # must list no tests/ or tsx files
    the note-body id replacement in `edit`, and the vendored `src/dialog/*.js`.
 2. No contract test between the content script message shape and the plugin handler.
 3. No CI, so nothing enforces `npm test`, `typecheck` or the build.
-4. Five known-bug tests are todo (S1, S4, S5) and do not yet protect anything; S3 has none.
+4. Two known-bug tests are todo (S4, S5) and do not yet protect anything; S3 has none.
+5. The S1 fix assumes Joplin's dialog parses `setHtml` content like a browser (entities in attribute
+   values decoded before `.value` is read). Unit tests mirror this with a decoder; confirm in Joplin.
 
 ## Manual verification checklist (interim)
 

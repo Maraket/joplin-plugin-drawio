@@ -149,7 +149,7 @@ Recorded after implementation; none of these change the decision.
   `npx tsc --noEmit` already failed with 14 errors, all in generated `api/*.d.ts`, so
   the documented gate was red before this change.
 - **`npm ci`** was failing on `master`; the lockfile was refreshed in a separate commit.
-- **Todo tests** (`{ todo }`) record unfixed findings S1, S4 and S5. They keep the run green
+- **Todo tests** (`{ todo }`) record unfixed findings (initially S1, S4 and S5). They keep the run green
   and are removed when the fixes land, satisfying rule 8.
 - **Rule 4 partly met.** `Settings` (class) stays in `src/settings.ts` because it imports
   runtime enums from `api/types`; only `settingsDefaults.ts` was extracted.
@@ -157,7 +157,8 @@ Recorded after implementation; none of these change the decision.
   `contentScript.js` hashes changed, from the module splits.
 - **Rule 8 amended for S3 (implementer amendment, 2026-10-16; not re-deliberated by the council, ratification pending).** There is no pure validator for the `server` setting yet
   (`_checks` in `settings.ts` is empty), so no expected-failure test can be written.
-  The test is added with fix 1.3. S1 (3 cases), S4 (1 case) and S5 (1 case) are todo tests.
+  The test is added with fix 1.3. S1 (3 cases), S4 (1 case) and S5 (1 case) were the initial todo tests; the S1 cases became
+  passing tests when `ffe320a` fixed it.
   S4 is testable without extraction because `contentScript.ts` has no Joplin dependency.
 - **Test command.** The glob is unquoted (`tests/*.test.ts`) so the shell expands it;
   Node's own `--test` glob support needs Node >= 21. `--import` needs Node >= 18.18,

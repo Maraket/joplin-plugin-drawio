@@ -14,7 +14,7 @@ reviewer's estimate for a desktop note-taking plugin. Remediation is tracked in
 
 ## Findings
 
-### S1. Attribute injection in dialog HTML (Medium)
+### S1. Attribute injection in dialog HTML (Medium) - fixed in `ffe320a`
 
 `buildDialogHTML` writes `JSON.stringify(settings)` into a **single-quoted**
 attribute and `themeUi` / `diagramBody` into double-quoted ones, with no escaping.
