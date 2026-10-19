@@ -2,12 +2,11 @@ import joplin from 'api'
 import { v4 as uuidv4 } from 'uuid'
 import { tmpdir } from 'os'
 import { sep } from 'path'
+import { TitlePrefix, DataImageRegex, buildTitle, parseTitle } from './resourceTitle'
 const fs = joplin.require('fs-extra')
 
 const Config = {
     TempFolder: `${tmpdir}${sep}joplin-drawio-plugin${sep}`,
-    DataImageRegex: /^data:image\/(?<extension>png|svg)(?:\+xml)?;base64,(?<blob>.*)/,
-    TitlePrefix: 'drawio-',
 }
 
 export interface IDiagramOptions {
@@ -18,20 +17,13 @@ function generateId() {
     return uuidv4().replace(/-/g, '')
 }
 
-function buildTitle(options: any): string {
-    return Config.TitlePrefix + JSON.stringify(options)
-}
-function parseTitle(title: string): any {
-    return JSON.parse(title.replace(Config.TitlePrefix, ''))
-}
-
 export function clearDiskCache(): void {
     fs.rmdirSync(Config.TempFolder, { recursive: true })
     fs.mkdirSync(Config.TempFolder, { recursive: true })
 }
 
 async function writeTempFile(name: string, data: string, filePath: string = null): Promise<string> {
-    const matches = data.match(Config.DataImageRegex)
+    const matches = data.match(DataImageRegex)
     if (!matches) {
         throw new Error('Invalid image data')
     }
@@ -84,5 +76,5 @@ export async function updateDiagramResource(diagramId: string, data: string, opt
 
 export async function isDiagramResource(diagramId: string): Promise<boolean> {
     const resourceProperties = await joplin.data.get(['resources', diagramId])
-    return resourceProperties.title.startsWith(Config.TitlePrefix)
+    return resourceProperties.title.startsWith(TitlePrefix)
 }

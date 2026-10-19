@@ -7,7 +7,7 @@ Items marked **ADR** are architectural and need council review and an ADR first.
 
 | # | Item | Source | Size |
 | --- | --- | --- | --- |
-| 1.1 | Escape attribute values in `buildDialogHTML` | security S1 | S |
+| 1.1 | ~~Escape attribute values in `buildDialogHTML`~~ (done on `adr/test-runner`) | security S1 | S |
 | 1.2 | Restrict `postMessage` target and check `evt.origin` in `DiagramEditor.js` | security S2 | S |
 | 1.3 | Validate `server` setting (https URL) via `_checks` | security S3 | S |
 | 1.4 | Remove payload logging, gate the rest behind a debug flag | security S6 | S |
@@ -30,7 +30,7 @@ Items marked **ADR** are architectural and need council review and an ADR first.
 
 | # | Item | Notes |
 | --- | --- | --- |
-| 3.1 | **ADR** Introduce unit test runner (Jest or Vitest), pure-function scope first | Unblocks every later item. Do before 1.x if possible. |
+| 3.1 | ~~ADR~~ Unit test runner: decided, see [ADR-0001](../docs/adr/0001-unit-test-runner.md) (node:test + tsx). Implemented on branch `adr/test-runner`. | Unblocks every later item. |
 | 3.2 | **ADR** Replace inline `<style onload>` with content-script asset and event delegation | security S4 |
 | 3.3 | **ADR** Toolchain upgrade: webpack 5, TypeScript 5, current `@types` | Clears most audit findings. Track against Joplin generator template. |
 | 3.4 | **ADR** Retire or bundle remote editor (offline, version pinning) | Large. Evaluate licence and size first. |
@@ -39,7 +39,7 @@ Items marked **ADR** are architectural and need council review and an ADR first.
 
 ## Phase 4 - Process
 
-- Add a CI workflow: `npm ci`, `npx tsc --noEmit`, `npm run dist`, tests.
+- Add a CI workflow: `npm ci`, `npm run typecheck`, `npm test`, `npm run dist`.
 - Enable `strict` in `tsconfig.json` incrementally.
 - Commit the process rules from `CLAUDE.md` or mirror them in `docs/`.
 - Single source for `version` (manifest and `package.json`).

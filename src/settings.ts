@@ -1,57 +1,10 @@
 import joplin from 'api'
 import { ChangeEvent } from 'api/JoplinSettings'
 import { SettingItem, SettingItemType } from 'api/types'
+import { SettingDefaults } from './settingsDefaults'
 
 interface SettingItems {
     [key: string]: SettingItem,
-}
-
-export const SettingDefaults = {
-    ui: 'kennedy',
-    themeUi: {
-        kennedy: "Kennedy (Default)",
-        min: "Minimal (Small screens and mobile optimized)",
-        atlas: "Atlas (Business oriented)",
-    },
-    languages: {
-        id: 'Bahasa Indonesia',
-        ms: 'Bahasa Melayu',
-        bs: 'Bosanski',
-        ca: 'Català',
-        cs: 'Čeština',
-        da: 'Dansk',
-        de: 'Deutsch',
-        et: 'Eesti',
-        en: 'English',
-        es: 'Español',
-        fil: 'Filipino',
-        fr: 'Français',
-        it: 'Italiano',
-        hu: 'Magyar',
-        nl: 'Nederlands',
-        no: 'Norsk',
-        pl: 'Polski',
-        'pt-br': 'Português (Brasil)',
-        pt: 'Português (Portugal)',
-        ro: 'Română',
-        fi: 'Suomi',
-        sv: 'Svenska',
-        vi: 'Tiếng Việt',
-        tr: 'Türkçe',
-        el: 'Ελληνικά',
-        ru: 'Русский',
-        sr: 'Српски',
-        uk: 'Українська',
-        he: 'עברית',
-        ar: 'العربية',
-        th: 'ไทย',
-        ko: '한국어',
-        ja: '日本語',
-        zh: '中文 (中国)',
-        'zh-tw': '中文 (台灣)'
-    },
-    defaultLanguage: 'en',
-    server: 'https://embed.diagrams.net/',
 }
 
 export class Settings {
