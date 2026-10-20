@@ -58,4 +58,4 @@ Run after any change to the dialog, content script or settings.
 
 Introduce Jest with ts-jest (or Vitest) limited to pure functions first. That is
 an architectural change under the project rules and needs a council review and
-an ADR. See [`plans/01-remediation-roadmap.md`](../plans/01-remediation-roadmap.md).
+an ADR. Tracked in the local remediation roadmap (not versioned).

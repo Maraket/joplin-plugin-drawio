@@ -1,8 +1,8 @@
 # Security Analysis
 
 Point-in-time review of trust boundaries and input handling. Severity is the
-reviewer's estimate for a desktop note-taking plugin. Remediation is tracked in
-[`plans/01-remediation-roadmap.md`](../plans/01-remediation-roadmap.md).
+reviewer's estimate for a desktop note-taking plugin. Remediation is tracked in the maintainer's
+local remediation roadmap, which is not versioned.
 
 ## Attack surface
 

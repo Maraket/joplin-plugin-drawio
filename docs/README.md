@@ -1,7 +1,7 @@
 # Documentation
 
 Documentation for shipped functionality and the current state of the codebase.
-Work that is not yet built lives in [`plans/`](../plans/).
+Planning documents (roadmaps, trackers) are kept outside version control.
 
 | Path | Contents |
 | --- | --- |
