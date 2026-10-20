@@ -7,8 +7,8 @@ This plugin allows you to create diagrams using the editor [diagrams.net](https:
 
 This plugin needs an internet connection to work.
 
-![Example1](./doc/example1.png)
-![Example2](./doc/example2.png)
+![Example1](./docs/images/example1.png)
+![Example2](./docs/images/example2.png)
 
 ## Install the plugin
 
@@ -29,7 +29,7 @@ Use the tools menu to create a new diagram and paste it in the note.
 
 > The diagram will be inserted where the cursor is.
 
-![Tools menu](./doc/tools_menu.png)
+![Tools menu](./docs/images/tools_menu.png)
 
 You can create your diagram using 2 different type of file format:
 * PNG: raster format
@@ -41,15 +41,15 @@ The sketch mode configures the diagram editor to simplify the hand drawing.
 
 If the plugin detects that the image is a draw.io diagram it will show an edit button on the top right when your mouse hover on the image.
 
-![Edit menu](./doc/edit_menu.png)
+![Edit menu](./docs/images/edit_menu.png)
 
 The plugin identify an image as a diagram if the alternative text is drawio and if the resource title starts with `drawio-`.
 
-![Markdown example](./doc/markdown_example.png)
+![Markdown example](./docs/images/markdown_example.png)
 
 # Settings
 
-![Settings](./doc/settings.png)
+![Settings](./docs/images/settings.png)
 
 
 # Development
