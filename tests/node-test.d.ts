@@ -1,7 +1,7 @@
 // Minimal typings for the Node built-ins used by the tests.
 // @types/node 14 (pinned by TypeScript 3.9) predates `node:test`, and newer
 // @types/node does not parse under TypeScript 3.9. Delete this file once the
-// toolchain upgrade (plans/01-remediation-roadmap.md, 3.3) allows @types/node >= 18.
+// toolchain upgrade (remediation roadmap item 3.3: webpack 5 and TypeScript 5) allows @types/node >= 18.
 
 declare module 'node:test' {
     interface TestOptions {

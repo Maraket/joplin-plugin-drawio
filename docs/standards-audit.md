@@ -9,8 +9,7 @@ repository, and records the coding conventions observed in `src/`.
 | --- | --- | --- |
 | `.standards/consolidated-standards.md` | No | Nothing to consult yet. |
 | `docs/adr/` with ADRs | No | No accepted architectural decisions are recorded. |
-| `plans/` with `README.md` index | No | Created alongside this audit. |
-| `plans/09-progress-tracker.md` | No | Created alongside this audit. |
+| `plans/` with `README.md` index and `plans/09-progress-tracker.md` | Local only | Kept untracked on purpose (global gitignore), so absent from the repository. |
 | Tests where a runner exists | No runner | See [testing](./testing.md). |
 | Conventional Commits | Partly | Recent history is free-form ("Update libs", "Add funding option"). Adopted going forward. |
 | `docs/` for developer docs | Now yes | Introduced by the doc restructure. |
@@ -55,4 +54,4 @@ These should become ADRs when next touched, so `.standards/` can reference them:
 ## Recommendation
 
 Create `.standards/` and the first ADRs from the list above, in the order of the
-[remediation roadmap](../plans/01-remediation-roadmap.md).
+local remediation roadmap (not versioned).

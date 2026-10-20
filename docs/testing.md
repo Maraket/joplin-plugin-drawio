@@ -90,4 +90,4 @@ Run after any change to the dialog, content script or settings.
 - [ ] Rich text editor mode (`file://` image src) still shows the button.
 - [ ] Light and dark Joplin themes.
 
-Next: wire `npm ci`, `typecheck`, `test` and `dist` into CI (roadmap Phase 4), then fix S1 and S5 and remove their `todo` markers.
+Next: wire `npm ci`, `typecheck`, `test` and `dist` into CI, then fix S4 and S5 and remove their `todo` markers.

@@ -9,7 +9,7 @@
 
 The project has no automated tests ([docs/testing.md](../testing.md)). Quality
 relies on a manual Joplin checklist. About 20 fixes are queued in the
-[remediation roadmap](../../plans/01-remediation-roadmap.md), several touching
+local remediation roadmap (not versioned; item numbers such as 3.1 refer to it), several touching
 security-relevant regexes and escaping (findings S1, S3, S4, S5 in
 [security-analysis](../security-analysis.md)). A runner is needed that works with
 the frozen toolchain (TypeScript 3.9.10, webpack 4, `@types/node` 14), because
